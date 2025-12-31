@@ -1,0 +1,21 @@
+# YouTube Downloader by Subha
+# Version: 2.0
+# Production Requirements
+
+# Web Framework
+Flask==3.0.0
+Flask-CORS==4.0.0
+
+# YouTube Downloading
+yt-dlp==2023.11.16
+
+# Production Server (Optional)
+# gunicorn==21.2.0
+
+# Utilities
+requests==2.31.0
+beautifulsoup4==4.12.2
+
+# Development Tools (Optional)
+# python-dotenv==1.0.0
+# colorama==0.4.6
