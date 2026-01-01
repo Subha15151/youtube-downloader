@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional YouTube Video Downloader. Download high-quality videos and audio instantly. Secure, fast, and free.">
+    <meta name="theme-color" content="#FF0000">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="YTDownloader | Pro Video Downloader">
+    <meta property="og:description" content="Download YouTube videos in 4K, 1080p, and MP3 formats instantly.">
+    <meta property="og:image" content="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg">
+    
+    <title>YTDownloader Pro | High Quality Video Downloader</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔻</text></svg>">
+</head>
+<body>
+    <div id="notification-container"></div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo-section">
+                <a href="/" class="logo">
+                    <i class="fab fa-youtube"></i>
+                    <span>YTDOWNLOADER<span class="pro-badge">PRO</span></span>
+                </a>
+            </div>
+            
+            <nav class="nav-menu">
+                <div class="owner-info">
+                    <span class="status-dot online"></span>
+                    <span class="owner-name">Server Online</span>
+                </div>
+                <a href="https://github.com/yourusername" target="_blank" class="github-btn" aria-label="View Source">
+                    <i class="fab fa-github"></i>
+                </a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <section class="hero">
+                <div class="hero-badge">v2.0 Stable Release</div>
+                <h1 class="hero-title">
+                    The Professional Way to <br>
+                    <span class="highlight">Download Content</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Support for 4K Video, MP3 Audio, Playlists, and Shorts. 
+                    <br>No ads. No limits. Just speed.
+                </p>
+                
+                <div class="input-section">
+                    <div class="input-card">
+                        <div class="input-wrapper">
+                            <i class="fas fa-link input-icon"></i>
+                            <input type="text" id="videoUrl" placeholder="Paste YouTube link here..." autocomplete="off">
+                            <button id="fetchBtn" class="fetch-btn" aria-label="Fetch Video Info">
+                                <span>Fetch Video</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <div class="input-tags">
+                            <span class="tag"><i class="fas fa-check"></i> MP4</span>
+                            <span class="tag"><i class="fas fa-check"></i> MP3</span>
+                            <span class="tag"><i class="fas fa-check"></i> 4K Ready</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="loading-state" id="loading" style="display: none;">
+                <div class="loader">
+                    <div class="spinner">
+                        <svg viewBox="25 25 50 50">
+                            <circle cx="50" cy="50" r="20" fill="none"></circle>
+                        </svg>
+                    </div>
+                    <div class="loader-text">
+                        <h3>Analyzing Video...</h3>
+                        <p>Extracting high-quality formats</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="error-state" id="error" style="display: none;">
+                <div class="error-content">
+                    <div class="error-icon"><i class="fas fa-times"></i></div>
+                    <div class="error-text">
+                        <h3>Analysis Failed</h3>
+                        <p id="errorMessage">Unable to fetch video details.</p>
+                    </div>
+                    <button class="retry-btn" id="retryBtn">Try Again</button>
+                </div>
+            </div>
+
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-grid">
+                    <div class="video-card" id="videoCard">
+                        <div class="thumbnail-container">
+                            <img id="thumbnail" src="" alt="Video Thumbnail">
+                            <div class="duration-badge" id="videoDuration">00:00</div>
+                        </div>
+                        <div class="video-info">
+                            <h2 id="videoTitle">Video Title</h2>
+                            <div class="video-meta">
+                                <span class="channel-name"><i class="fas fa-check-circle"></i> <span id="videoChannel">Channel</span></span>
+                                <span class="view-count"><i class="fas fa-eye"></i> <span id="videoViews">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="options-card">
+                        <div class="tabs-header">
+                            <button class="tab-btn active" data-type="video">
+                                <i class="fas fa-video"></i> Video Formats
+                            </button>
+                            <button class="tab-btn" data-type="audio">
+                                <i class="fas fa-music"></i> Audio Only
+                            </button>
+                        </div>
+                        
+                        <div class="formats-list" id="formatsContainer">
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="history-section" id="historySection" style="display: none;">
+                <div class="section-header">
+                    <h3><i class="fas fa-history"></i> Recent Downloads</h3>
+                    <button class="clear-history-btn" id="clearHistory">Clear</button>
+                </div>
+                <div class="history-grid" id="historyGrid">
+                    </div>
+            </section>
+
+            <section class="features-section">
+                <div class="features-grid">
+                    <div class="feature-box">
+                        <div class="icon-circle"><i class="fas fa-bolt"></i></div>
+                        <h4>Lightning Fast</h4>
+                        <p>Direct server connections ensure max speed.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="icon-circle"><i class="fas fa-shield-alt"></i></div>
+                        <h4>Secure Core</h4>
+                        <p>No data logging. Your privacy is priority.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="icon-circle"><i class="fas fa-expand"></i></div>
+                        <h4>Best Quality</h4>
+                        <p>Get the highest bitrate available.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="disclaimer-area">
+                <p><i class="fas fa-info-circle"></i> <strong>Legal Note:</strong> This tool is for educational and personal use only. Please respect YouTube's Terms of Service and creator copyrights.</p>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2026 YTDownloader Pro. Built by Subha.</p>
+                </div>
+                <div class="footer-right">
+                    <span class="server-status"><i class="fas fa-signal"></i> System Operational</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
